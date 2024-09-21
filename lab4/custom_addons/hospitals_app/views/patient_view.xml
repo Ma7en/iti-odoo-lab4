@@ -1,0 +1,124 @@
+<odoo>
+    <record id="patient_tree_view" model="ir.ui.view">
+        <field name="name">patient.tree.view</field>
+        <field name="model">hms.patient</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="ref"/>
+                <field name="first_name"/>
+                <field name="last_name"/>
+                <field name="birth_date"/>
+                <field name="age" />
+
+                <field name="cr_ratio"/>
+                <field name="blood_type"/>
+                <field name="pcr"/>
+                <field name="department_id"/>
+
+<!--                <field name="email" optional="hide"/>-->
+                <field name="image" optional="hide"/>
+                <field name="address" optional="hide"/>
+                <field name="history" optional="hide"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="patient_form_view" model="ir.ui.view">
+        <field name="name">patient.form.view</field>
+        <field name="model">hms.patient</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_undetermined"
+                            type="object"
+                            class="btn-secondary"
+                            string="Undetermined"
+                            invisible="state != 'serious'"
+                            />
+                    <button name="action_good"
+                            type="object"
+                            class="btn-primary"
+                            string="Good"
+                            invisible="state != 'undetermined'"
+                            />
+                    <button name="action_fair"
+                            type="object"
+                            class="btn-success"
+                            string="Fair"
+                            invisible="state != 'good'"
+                            />
+                    <button name="action_serious"
+                            type="object"
+                            class="btn-info"
+                            string="Serious"
+                            invisible="state != 'fair'"
+                            />
+
+
+                    <button name="action_add_history_wizard"
+                            type="object"
+                            class="btn-secondary"
+                            string="Add/Change History"
+                            />
+
+                    <field name="state"
+                           widget="statusbar"
+                           options="{'clickable': '1'}"
+                            />
+                </header>
+
+
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="ref" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group string="General Info">
+                        <group>
+                            <field name="first_name" required="1"/>
+                            <field name="last_name" required="1"/>
+                            <field name="birth_date"/>
+                            <field name="cr_ratio"/>
+                        </group>
+                        <group>
+                            <field name="blood_type"/>
+                            <field name="pcr"/>
+                            <field name="image"/>
+                            <field name="age"/>
+
+                            <field name="department_id" domain="[('is_opened', '=', 'True')]"/>
+                        </group>
+                        <group>
+                            <field name="address"/> 
+                            <field name="history" invisible="age &lt; 50"/> 
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Logs">
+                            <field name="log_history">
+                                <tree editable="bottom">
+                                    <field name="create_uid"/>
+                                    <field name="date"/>
+                                    <field name="description"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="hospitals_patient_action" model="ir.actions.act_window">
+        <field name="name">Patients</field>
+        <field name="res_model">hms.patient</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menuitem_hospitals_patient"
+              name="All Patients"
+              parent="menu_root_patient"
+              action="hospitals_patient_action"/>
+</odoo>

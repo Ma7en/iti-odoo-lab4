@@ -1,0 +1,22 @@
+<odoo>
+    <menuitem id="menu_hospitals"
+              name="Hospitals"
+              web_icon="hospitals_app, static/description/icon.png"
+              />
+
+    <menuitem id="menu_root_patient"
+              name="Patients"
+              parent="menu_hospitals"
+              />
+
+    <menuitem id="menu_root_doctor"
+              name="Doctors"
+              parent="menu_hospitals"
+              />
+
+    <menuitem id="menu_root_department"
+              name="Departments"
+              parent="menu_hospitals"
+              />
+
+</odoo>

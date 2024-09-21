@@ -1,0 +1,91 @@
+<odoo>
+  <record id="patient_print" model="ir.actions.report">
+        <field name="name">Patient Print</field>
+        <field name="model">hms.patient</field> 
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">hospitals_app.patient_report</field>
+        <field name="report_file">hospitals_app.patient_report</field>
+        <field name="binding_model_id" ref="hospitals_app.model_hms_patient"/>
+        <field name="binding_type">report</field>
+        <field name="print_report_name">'Patient - %s' % (object.first_name)</field>
+    </record>
+    <template id="patient_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+            <t t-call="web.basic_layout">
+                <div class="page">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="text-center">Patient</h1>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <span>Name:</span>
+                            <span t-esc="doc.first_name"/>  
+                        </div>
+                        <div class="mb-2">
+                            <span>Age:</span>
+                            <span t-esc="doc.age"/>
+                        </div>
+                        <div class="mb-2">
+                            <span>Department:</span>
+                            <span t-esc="doc.department_id.name"/>  
+                        </div>
+                        <div class="mb-2">
+                            <span>Doctors:</span>
+                            <span t-esc="doc.doctor_id.full_name"/>  
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <span>Birth date:</span>
+                            <span t-esc="doc.birth_date"/>
+                        </div>
+                        <div class="mb-2">
+                            <span>PCR:</span>
+                            <span t-esc="doc.pcr"/>
+                        </div>
+                        <div class="mb-2">
+                            <span>Blood Type:</span>
+                            <span t-esc="doc.blood_type"/>
+                        </div>
+                        <div class="mb-2">
+                            <span>Email:</span>
+                            <span t-esc="doc.email"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <h2>Log History</h2>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>Date</th>
+                                    <th>Info</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="doc.history_ids" t-as="h">
+                                    <td><span t-esc="h.create_uid.name"/></td>
+                                    <td><span t-esc="h.date"/></td>
+                                    <td><span t-esc="h.description"/></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

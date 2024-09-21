@@ -1,0 +1,34 @@
+<odoo> 
+    <record id="add_history_form_view" model="ir.ui.view">
+        <field name="name">add.history.form.view</field>
+        <field name="model">hsm.add.history</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="patient_id" readonly="1"/>
+                    <field name="history"/>
+                </group>
+                <footer>
+                    <button name="action_add_history"
+                            type="object"
+                            class="btn-primary"
+                            string="Confirm"
+                            />
+
+                    <button class="btn-secondary"
+                            string="Cancel"
+                            special="cancel"
+                            />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="add_history_action" model="ir.actions.act_window">
+        <field name="name">Add History</field>
+        <field name="res_model">hsm.add.history</field>
+        <field name="view_mode">form</field> 
+        <field name="view_id" ref="add_history_form_view"/>
+        <field name="target">new</field>
+    </record>
+</odoo>

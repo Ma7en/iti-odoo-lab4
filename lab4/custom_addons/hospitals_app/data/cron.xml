@@ -1,0 +1,15 @@
+<odoo>
+    <record id="book_archive_cron_job" model="ir.cron">
+        <field name="name">Library App: Archive old records</field>
+        <field name="model_id" ref="library_app.model_lr_book"/>
+        <field name="state">code</field>
+        <field name="code">model.archive_book()</field>
+        <field name="interval_number">1</field>
+<!--        <field name="interval_type">days</field>-->
+        <field name="interval_type">months</field>
+<!--        <field name="interval_type">weeks</field>-->
+<!--        <field name="interval_type">years</field>-->
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="True"/>
+    </record>
+</odoo>

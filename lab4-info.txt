@@ -1,0 +1,111 @@
+# How to run this lab 
+
+# step1:- 
+- 1. how to install web dependencies and packages:
+
+sudo apt-get install python-dev python3-dev libxml2-dev libxslt1-dev zlib1g-dev libsasl2-dev libldap2-dev build-essential libssl-dev libffi-dev libmysqlclient-dev libjpeg-dev libpq-dev libjpeg8-dev liblcms2-dev libblas-dev libatlas-base-dev
+sudo apt-get install -y npm
+sudo ln -s /usr/bin/nodejs /usr/bin/node
+sudo npm install -g less less-plugin-clean-css
+sudo apt-get install -y node-less
+
+
+
+
+# step 2:-
+2. how to install odoo and it's requirements:
+
+-> create folder -> itig1odoo17
+-> Inside this folder 
+-> open termainl
+
+git clone https://www.github.com/odoo/odoo --depth 1 --branch 17.0 odoo17
+python version 3.10
+pip3 install wheel
+cd /odoo17
+pip3 install -r requirements.txt
+
+
+
+
+# step 3:-
+3. how to install Wkhtmltopdf:
+-> Inside the odoo17 folder 
+-> open termainl
+
+sudo wget https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.5/wkhtmltox_0.12.5-1.bionic_amd64.deb
+sudo dpkg -i wkhtmltox_0.12.5-1.bionic_amd64.deb
+sudo apt install -f
+
+
+
+
+# step 4:-
+4. how to create postgres ser and make it as a superuser:
+
+sudo su - postgres
+createuser --createdb --username postgres --no-createrole --no-superuser --pwprompt itig1odoo17
+123
+psql
+ALTER USER itig1odoo17 WITH SUPERUSER; 
+
+
+
+
+# step 5:-
+-> Inside the odoo17 folder 
+-> Put the odoo.conf file
+
+
+
+
+
+# step 6:-
+-> Inside the odoo folder 
+-> Put the custom_addons folder
+
+ 
+
+
+
+# step 7 :- 
+-> edit Run/Debug Configurations 
+    -> name -> odoo17
+    -> script -> odoo-bin
+    -> -c odoo.conf -u hospitals_app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
